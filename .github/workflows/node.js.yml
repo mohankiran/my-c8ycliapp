@@ -29,8 +29,8 @@ jobs:
         cache: 'npm'
     - run: npm i    
     - run: npm test
-    - uses: ArtiomTr/jest-coverage-report-action@v2
     - name: Validate report
+      uses: ArtiomTr/jest-coverage-report-action@v2
       with:
         working-directory: coverage/
         coverage-file: coverage-final.json
