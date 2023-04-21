@@ -28,9 +28,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i    
-    - run: npm test --coverage --coverageReporters=text-lcov | npx coveralls
-    - name: Show Coverage
-      run: |
-        cat ./coverage/lcov.info | npx coveralls
-        cat ./coverage/lcov.info | npm jest-coverage-badge-reporter --badgeFile='./coverage/badge.svg'
+    - run: npm test
+    - name: Show Report
+      run: coverage/lcov.info
     
