@@ -32,7 +32,7 @@ jobs:
     - name: Validate report
       uses: ArtiomTr/jest-coverage-report-action@v2
       with:
-        working-directory: coverage/
+        working-directory: coverage_c8y/
         coverage-file: coverage-final.json
         base-coverage-file: coverage-final.json
     
