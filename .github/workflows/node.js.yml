@@ -29,11 +29,10 @@ jobs:
         cache: 'npm'
     - run: npm i    
     - run: npm test
-    - name: Generate report
-      run: npx istanbul report
-    - name: Upload Report
-      uses: actions/upload-artifact@v2
+    - name: Validate report
+    - uses: ArtiomTr/jest-coverage-report-action@v2
       with:
-        name: coverage-report
-        path: coverage
+        working-directory: coverage/
+        coverage-file: coverage-final.json
+        base-coverage-file: coverage-final.json
     
