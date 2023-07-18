@@ -22,5 +22,5 @@ jobs:
         run: |
             curl -X POST https://api.github.com/repos/:mohankiran/:sol-cpi-commercial-pool-automation/dispatches \
             -H 'Accept: application/vnd.github.everest-preview+json' \
-            -u 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 \
+            -u "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" \
             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}'
