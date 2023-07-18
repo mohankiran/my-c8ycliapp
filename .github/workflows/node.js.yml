@@ -37,7 +37,7 @@ jobs:
             conclusion=$(echo "$response" | jq -r '.workflow_runs[0].conclusion')
             echo "status: $status"
             echo "conclusion: $conclusion"
-            if [[ "$status" == "completed" ]]; then
+            if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
               echo "Automation Workflow completed."
               break
             elif [[ "$status" == "in_progress" || "$status" == "queued" ]]; then
@@ -46,8 +46,10 @@ jobs:
               echo "Automation Workflow failed or canceled. Exiting..."
             fi
 
-            sleep 10
+            sleep 60
           done
 
-      - name: Run Other Steps
+      - name: Run First Step
         run: echo "Workflow Status '${{ steps.wait-for-automation.outputs.status }}'"
+      - name: next Step
+        run: echo "Conclusion Status '${{ steps.wait-for-automation.outputs.conclusion }}'"
