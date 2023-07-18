@@ -50,5 +50,4 @@ jobs:
           done
 
       - name: Run Other Steps
-        if: steps.wait-for-automation.outputs.automation.conclusion == 'success'
-        run: echo "We can go further"
+        run: echo "Workflow Status '${{ steps.wait-for-automation.status }}'"
