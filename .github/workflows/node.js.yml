@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
+  workflow_run:
+    workflows: ["Automation Workflow"]
+    types:
+      - completed
 
 jobs:
   build:
@@ -28,6 +32,6 @@ jobs:
             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}'
             
       - name: Run other steps
-        if: steps.automation-check.outcome == 'success'
+        if: steps.wait-for-automation.outputs.success == 'true'
         run: |
           echo "Status is success"
