@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on:
@@ -31,28 +28,29 @@ jobs:
             -u ${{ secrets.ACTIONS_KEY }} \
             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}'
             echo "::set-output name=triggered::true"
-      - name: Fetch the status, run ID = ${{steps.automation_check.outputs.triggered}}
-        if: steps.trigger_automation.outputs.triggered == 'true'
+            
+      - name: Wait for Automation Workflow
         run: |
-          echo "Status is success"
+          echo "Waiting for Automation Workflow completion..."
+          while true; do
+            response=$(curl -s -X GET -u ${{ secrets.ACTIONS_KEY }} https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/runs/maven.yml)
+            status=$(echo "$response" | jq -r '.status')
+            conclusion=$(echo "$response" | jq -r '.conclusion')
 
-#         - name: Dispatch an action and get the run ID
-#           uses: codex-/return-dispatch@v1
-#           id: return_dispatch
-#           with:
-#               token: ${{ secrets.ACTIONS_KEY }}
-#               repo: sol-cpi-commercial-pool-automation
-#               owner: mohankiran
-#               ref: main
-#               workflow: maven.yml
-              
-#         - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
-#           uses: Codex-/await-remote-run@v1.0.0
-#           with:
-#               token: ${{ secrets.ACTIONS_KEY}}
-#               repo: return-dispatch
-#               owner: mohankiran
-#               run_id: ${{ steps.return_dispatch.outputs.run_id }}
-#               ref: main
-#               run_timeout_seconds: 300 # Optional
-#               poll_interval_ms: 5000 # Optional
+            if [[ "$status" == "completed" ]]; then
+              echo "Automation Workflow completed."
+              break
+            elif [[ "$status" == "in_progress" ]]; then
+              echo "Automation Workflow still in progress. Waiting..."
+            else
+              echo "Automation Workflow failed or canceled. Exiting..."
+              exit 1
+            fi
+
+            sleep 30
+          done
+
+      - name: Run Other Steps
+        run: |
+          # Run the other steps as the automation workflow is completed successfully
+
