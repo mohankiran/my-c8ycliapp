@@ -33,6 +33,7 @@ jobs:
           echo "Waiting for Automation Workflow completion..."
           while true; do
             response=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}" https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/runs/${{ steps.automation_check.outputs.automation-run-id }})
+            echo "Response: $response"
             status=$(echo "$response" | jq -r '.status')
             conclusion=$(echo "$response" | jq -r '.conclusion')
             echo "Default status: $status"
