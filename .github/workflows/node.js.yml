@@ -7,8 +7,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "" ]
 
 jobs:
   build:
@@ -18,16 +16,11 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install Dependenices
-      run: npm i    
-    - name: Test
-      run: npm test
+      - name: Trigger Workflow and Wait
+        uses: convictional/trigger-workflow-and-wait@v1.6.5
+        with:
+            owner: mohankiran
+            repo: sol-cpi-commercial-pool-automation
+            github_token: ${{ env.GITHUB_TOKEN }}
