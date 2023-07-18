@@ -23,4 +23,4 @@ jobs:
         with:
             owner: mohankiran
             repo: sol-cpi-commercial-pool-automation
-            github_token: ${{ env.GITHUB_TOKEN }}
+            github_token: ${{ secrets.GITHUB_TOKEN }}
