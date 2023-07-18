@@ -43,6 +43,7 @@ jobs:
               token: ${{ secrets.ACTIONS_KEY }}
               repo: sol-cpi-commercial-pool-automation
               owner: mohankiran
+              ref: main
               workflow: maven.yml
               
         - name: Await Run ID ${{ steps.return_dispatch.outputs.run_id }}
@@ -52,5 +53,6 @@ jobs:
               repo: return-dispatch
               owner: mohankiran
               run_id: ${{ steps.return_dispatch.outputs.run_id }}
+              ref: main
               run_timeout_seconds: 300 # Optional
               poll_interval_ms: 5000 # Optional
