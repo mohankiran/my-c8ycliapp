@@ -18,13 +18,6 @@ jobs:
         node-version: [14.x]
 
     steps:
-      - name: Trigger Workflow and Wait
-        uses: convictional/trigger-workflow-and-wait@v1.6.5
-        with:
-            owner: mohankiran
-            repo: sol-cpi-commercial-pool-automation
-            github_token: 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
-            workflow_file_name: maven.yml
       - name: Test
         run: |
             curl -X POST https://api.github.com/repos/:mohankiran/:sol-cpi-commercial-pool-automation/dispatches \
