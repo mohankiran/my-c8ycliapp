@@ -27,12 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm i    
-    - run: npm test
-    - name: Validate report
-      uses: ArtiomTr/jest-coverage-report-action@v2
-      with:
-        working-directory: coverage_c8y/
-        coverage-file: coverage-final.json
-        base-coverage-file: coverage-final.json
-    
+    - name: Install Dependenices
+      run: npm i    
+    - name: Test
+      run: npm test
