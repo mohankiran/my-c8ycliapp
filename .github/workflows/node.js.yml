@@ -33,8 +33,8 @@ jobs:
           echo "Waiting for Automation Workflow completion..."
           while true; do
             response=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}" https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/workflows/maven.yml/runs)
-            status=$(echo "$response" | jq -r '.workflow_runs[0].status')
-            conclusion=$(echo "$response" | jq -r '.workflow_runs[0].conclusion')
+            status=$(echo "$response" | jq -r '.status')
+            conclusion=$(echo "$response" | jq -r '.conclusion')
             echo "Default status: $status"
             echo "Default conclusion: $conclusion"
             if [[ "$status" == "completed" ]]; then
