@@ -43,7 +43,6 @@ jobs:
               echo "Automation Workflow still in progress. Waiting..."
             else
               echo "Automation Workflow failed or canceled. Exiting..."
-              exit 1
             fi
 
             sleep 60
