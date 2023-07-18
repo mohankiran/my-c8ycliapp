@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -33,10 +32,10 @@ jobs:
         run: |
           echo "Waiting for Automation Workflow completion..."
           while true; do
-            response=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}" https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/runs/${{ steps.automation-check.outputs.automation-run-id }})
+            response=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}" https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/runs/${{ steps.automation_check.outputs.automation-run-id }})
             status=$(echo "$response" | jq -r '.status')
             conclusion=$(echo "$response" | jq -r '.conclusion')
-            echo "Default status:: $status"
+            echo "Default status: $status"
             if [[ "$status" == "completed" ]]; then
               echo "Automation Workflow completed."
               break
@@ -50,6 +49,5 @@ jobs:
           done
 
       - name: Run Other Steps
-        if: steps.wait-for-automation.output.automation-conclusion == 'success'
+        if: steps.wait-for-automation.outputs.automation-conclusion == 'success'
         run: echo "We can go further"
-
