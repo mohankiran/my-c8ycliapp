@@ -51,5 +51,3 @@ jobs:
 
       - name: Run First Step
         run: echo "Workflow Status '${{ steps.wait-for-automation.outputs.status }}'"
-      - name: next Step
-        run: echo "Conclusion Status '${{ steps.wait-for-automation.outputs.conclusion }}'"
