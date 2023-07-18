@@ -31,10 +31,10 @@ jobs:
             -u ${{ secrets.ACTIONS_KEY }} \
             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}'
 
-      - name: Fetch the status, run ID = ${{steps.automation_check.outputs.triggered}}
-        if: steps.trigger_automation.outputs.triggered == 'true'
-        run: |
-          echo "Status is success"
+#       - name: Fetch the status, run ID = ${{steps.automation_check.outputs.triggered}}
+#         if: steps.trigger_automation.outputs.triggered == 'true'
+#         run: |
+#           echo "Status is success"
 
 #         - name: Dispatch an action and get the run ID
 #           uses: codex-/return-dispatch@v1
