@@ -50,4 +50,4 @@ jobs:
           done
 
       - name: Run Other Steps
-        run: echo "Workflow Status '${{ steps.wait-for-automation.status }}'"
+        run: echo "Workflow Status '${{ steps.wait-for-automation.outputs.status }}'"
