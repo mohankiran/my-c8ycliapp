@@ -46,7 +46,7 @@ jobs:
               exit 1
             fi
 
-            sleep 30
+            sleep 60
           done
 
       - name: Run Other Steps
