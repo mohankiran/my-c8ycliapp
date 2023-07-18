@@ -23,5 +23,5 @@ jobs:
         with:
             owner: mohankiran
             repo: sol-cpi-commercial-pool-automation
-            github_token: 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
+            github_token: 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
             workflow_file_name: maven.yml
