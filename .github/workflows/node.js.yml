@@ -36,7 +36,7 @@ jobs:
             response=$(curl -s -X GET -u ${{ secrets.ACTIONS_KEY }} https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/runs/maven.yml)
             status=$(echo "$response" | jq -r '.status')
             conclusion=$(echo "$response" | jq -r '.conclusion')
-
+            echo "Default status:: $status"
             if [[ "$status" == "completed" ]]; then
               echo "Automation Workflow completed."
               break
