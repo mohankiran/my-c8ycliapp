@@ -26,6 +26,7 @@ jobs:
             -H 'Accept: application/vnd.github.everest-preview+json' \
             -u ${{ secrets.ACTIONS_KEY }} \
             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}')
+            echo "response: $response"
             
       - name: Wait for Automation Workflow
         id: wait-for-automation
