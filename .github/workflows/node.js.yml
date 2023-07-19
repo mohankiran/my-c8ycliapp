@@ -14,13 +14,19 @@ jobs:
     
     steps:
       - name: Automation Check
-        run: |
-            response=$(curl -X POST https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/dispatches \
-            -H 'Accept: application/vnd.github.everest-preview+json' \
-            -u ${{ secrets.ACTIONS_KEY }} \
-            --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}')
-            echo "response: $response"  
-            
+#         run: |
+#             response=$(curl -X POST https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/dispatches \
+#             -H 'Accept: application/vnd.github.everest-preview+json' \
+#             -u ${{ secrets.ACTIONS_KEY }} \
+#             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}')
+#             echo "response: $response"  
+      
+      - uses: convictional/trigger-workflow-and-wait@v1.6.1
+        with:
+         owner: mohankiran
+         repo: sol-cpi-commercial-pool-automation
+         github_token: ${{ secrets.ACTIONS_KEY }}
+
   build:
     needs: [automation]
     runs-on: ubuntu-latest
