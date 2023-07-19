@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
-  workflow_run:
-    workflows: ["Automation Workflow"]
 
 jobs:
   automation:
@@ -14,13 +12,6 @@ jobs:
     
     steps:
       - name: Automation Check
-#         run: |
-#             response=$(curl -X POST https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/dispatches \
-#             -H 'Accept: application/vnd.github.everest-preview+json' \
-#             -u ${{ secrets.ACTIONS_KEY }} \
-#             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}')
-#             echo "response: $response"  
-      
         uses: convictional/trigger-workflow-and-wait@v1.6.1
         with:
          owner: mohankiran
@@ -37,37 +28,5 @@ jobs:
         node-version: [16.x]
 
     steps:
-#       - run: echo "Triggering from UI"
-#       - name: Automation Check
-#         id: automation_check
-#         run: |
-#             response=$(curl -X POST https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/dispatches \
-#             -H 'Accept: application/vnd.github.everest-preview+json' \
-#             -u ${{ secrets.ACTIONS_KEY }} \
-#             --data '{"event_type": "Automation Workflow", "client_payload": { "repository": "https://github.com/mohankiran/sol-cpi-commercial-pool-automation" }}')
-#             echo "response: $response"
-            
-#       - name: Wait for Automation Workflow
-#         id: wait-for-automation
-#         run: |
-#           echo "Waiting for Automation Workflow completion..."
-#           while true; do
-#             response=$(curl -s -X GET -H "Authorization: Bearer ${{ secrets.ACTIONS_KEY }}" https://api.github.com/repos/mohankiran/sol-cpi-commercial-pool-automation/actions/workflows/maven.yml/runs)
-#             status=$(echo "$response" | jq -r '.workflow_runs[0].status')
-#             conclusion=$(echo "$response" | jq -r '.workflow_runs[0].conclusion')
-#             echo "status: $status"
-#             echo "conclusion: $conclusion"
-#             if [[ "$status" == "completed" && "$conclusion" == "success" ]]; then
-#               echo "Automation Workflow completed."
-#               break
-#             elif [[ "$status" == "in_progress" || "$status" == "queued" ]]; then
-#               echo "Automation Workflow still in progress. Waiting..."
-#             else
-#               echo "Automation Workflow failed or canceled. Exiting..."
-#             fi
-
-#             sleep 60
-#           done
-
       - name: Step 2
         run: echo "it worked"
