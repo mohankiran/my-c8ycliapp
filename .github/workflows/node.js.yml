@@ -26,6 +26,7 @@ jobs:
          owner: mohankiran
          repo: sol-cpi-commercial-pool-automation
          github_token: ${{ secrets.ACTIONS_KEY }}
+         workflow_file_name: maven.yml
 
   build:
     needs: [automation]
