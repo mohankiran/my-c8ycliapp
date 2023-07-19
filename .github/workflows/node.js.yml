@@ -49,5 +49,5 @@ jobs:
             sleep 60
           done
 
-      - name: Run First Step
-        run: echo "Workflow Status '${{ steps.wait-for-automation.outputs.status }}'"
+      - name: Run Dependencies
+        run: npm install
